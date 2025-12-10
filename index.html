@@ -11,11 +11,12 @@ body{
     font-family:'Cairo',sans-serif;
     margin:0;
     padding:0;
-    background:linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    background:linear-gradient(135deg, #141e30, #243b55); /* خلفية داكنة */
     color:#fff;
     text-align:center;
 }
 
+/* الهيدر */
 .header{
     padding:40px 20px;
 }
@@ -31,8 +32,7 @@ body{
 
 /* الكروت */
 .card{
-    background:#ffffff15;
-    backdrop-filter:blur(12px);
+    background: rgba(20,30,48,0.8); /* نفس لون الخلفية مع شفافية */
     padding:25px;
     border-radius:20px;
     width:90%;
@@ -41,7 +41,12 @@ body{
     animation: ytvCardIn 0.7s ease forwards;
     opacity:0;
     transform:translateY(25px);
+    color:#fff;
 }
+
+.card:nth-child(1){animation-delay:.1s;}
+.card:nth-child(2){animation-delay:.2s;}
+.card:nth-child(3){animation-delay:.3s;}
 
 @keyframes ytvCardIn {
   0% { transform: translateY(20px) scale(0.95); opacity: 0; }
@@ -59,7 +64,7 @@ body{
     color:white;
     text-decoration:none;
     border-radius:15px;
-    background:linear-gradient(135deg, #ff7a00, #ff3c00);
+    background:linear-gradient(135deg, #ff416c, #ff4b2b); /* زر بارز بالوان جذابة */
     font-weight:700;
     transition:.3s;
     text-align:center;
@@ -69,18 +74,18 @@ body{
     opacity:.9;
 }
 
-/* صندوق المعلومات عمودي مع أيقونات */
+/* صندوق المعلومات */
 .info-column{
     display:flex;
     flex-direction:column;
     align-items:flex-start;
     justify-content:center;
     padding:15px 20px;
-    background:#ffffff22;
+    background: rgba(20,30,48,0.6); /* تناغم مع الخلفية */
     border-radius:15px;
     margin-top:15px;
     font-size:16px;
-    gap:12px;
+    gap:10px;
 }
 
 .info-item{
@@ -92,21 +97,60 @@ body{
 
 .stars{
     color:#ffd700;
-    font-size:20px;
+    font-size:18px;
 }
 
-.gallery-img{
+/* الهاتف على شكل YATV */
+.phone-frame{
     width:260px;
-    max-width:95%;
-    height:420px;
-    object-fit:cover;
-    border-radius:15px;
-    margin:10px;
-    cursor:pointer;
-    transition:.3s;
+    max-width:90%;
+    margin:15px auto;
+    border-radius:35px;
+    background:#0e0e0e;
+    box-shadow:0 15px 40px rgba(0,0,0,0.5);
+    position: relative;
+    display:inline-block;
+    padding:12px;
 }
-.gallery-img:hover{transform:scale(1.05);} 
 
+.phone-frame::before{
+    content:"";
+    display:block;
+    width:50px;
+    height:5px;
+    background:#333;
+    border-radius:3px;
+    position:absolute;
+    top:8px;
+    left:50%;
+    transform:translateX(-50%);
+}
+
+.phone-frame::after{
+    content:"";
+    display:block;
+    width:40px;
+    height:40px;
+    background:#333;
+    border-radius:50%;
+    position:absolute;
+    bottom:8px;
+    left:50%;
+    transform:translateX(-50%);
+}
+
+.app-screen{
+    width:100%;
+    border-radius:20px;
+    cursor:pointer;
+    transition:0.3s;
+    display:block;
+}
+.app-screen:hover{
+    transform:scale(1.03);
+}
+
+/* نافذة عرض الصور */
 #lightbox{
     display:none;
     position:fixed;
@@ -131,7 +175,7 @@ footer{
     background:#0006;
 }
 footer a{
-    color:#ff7a00;
+    color:#ffd700;
     text-decoration:none;
     font-weight:600;
 }
@@ -161,15 +205,12 @@ function closeImage(){
 
 <div class="card">
     <h2>تحميل التطبيق</h2>
-    <p>اضغط على الزر بالأسفل لتحميل التطبيق</p>
-
     <a href="https://apk.e-droid.net/apk/app3841485-vspjwl.apk?v=1" class="btn-download">
         اضغط هنا للتحميل
     </a>
 
-    <!-- المعلومات العمودية مع أيقونات -->
     <div class="info-column">
-        <div class="info-item"><span>🌟</span><span>التقييم: 4/5</span></div>
+        <div class="info-item"><span>🌟</span><span>تقييم التطبيق: 4/5</span></div>
         <div class="info-item"><span>📂</span><span>التصنيف: بث مباشر</span></div>
         <div class="info-item"><span>📦</span><span>الحجم: 31.1MB</span></div>
     </div>
@@ -178,19 +219,21 @@ function closeImage(){
 <div class="card">
     <h3>صور من داخل التطبيق</h3>
 
-    <img src="https://up6.cc/2025/10/176532675582612.jpg" class="gallery-img" onclick="openImage(this.src)">
-    <img src="https://up6.cc/2025/10/176532675579851.jpg" class="gallery-img" onclick="openImage(this.src)">
+    <div class="phone-frame">
+        <img src="https://g.top4top.io/p_3630ppxtp1.jpg" class="app-screen" onclick="openImage(this.src)">
+    </div>
+    <div class="phone-frame">
+        <img src="https://h.top4top.io/p_36305l6rt2.jpg" class="app-screen" onclick="openImage(this.src)">
+    </div>
 </div>
 
 <div id="lightbox" onclick="closeImage()">
     <img id="lightbox-img" src="">
 </div>
 
-<!-- الفوتر مع رابط سياسة الخصوصية -->
 <footer>
-    <p>للاطلاع على سياسة : <a href="https://osmanharoun204-svg.github.io/osman-tv-privacy/" target="_blank">الخصوصية </a></p>
+    <p>للاطلاع على سياسة الخصوصية: <a href="https://osmanharoun204-svg.github.io/osman-tv-privacy/" target="_blank">اضغط هنا</a></p>
 </footer>
 
 </body>
 </html>
-
